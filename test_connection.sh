@@ -2,7 +2,8 @@
 echo "Please, insert a network address (IP or URL)"
 read internet_address
 echo "Checking connection with remote host"
-ping -c 5 $internet_address > /dev/null
+ping -c 5 $internet_address &> /dev/null
+echo ""
 if [ $? == 0 ]
 then
 		echo "THE CONNECTION WITH REMOTE HOST WAS SUCCESSFULL"
