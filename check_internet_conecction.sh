@@ -4,11 +4,13 @@ test_network_connection ()
 {
 	echo "Please, insert a network address (IP or URL)"
 	read internet_address
-	ping $internet_address &> /dev/null
+	ping -c 1 "${internet_address}" &> /dev/null
+#try fping
+#   fping -c 1 "${internet_address}" &> /dev/null
 }
 connection_status ()
 {
-	if [ $? == 0 ]
+	if [ "${?}" -eq 0 ]
 	then
 		echo "THE CONNECTION WITH REMOTE HOST WAS SUCCESSFULL"
 	else
@@ -17,7 +19,8 @@ connection_status ()
 		echo "Please, check your network settings and try again to be sure if remote host is not reachable"
 		echo ""
 	echo "If this test still fail, please, check the network settings in remote host"
-	fi
+    fi
+try_again
 }
 try_again ()
 {
@@ -28,7 +31,8 @@ try_again ()
 			test_network_connection
 			connection_status
 		elif [ $yes_or_not == "n" ]
-			exit
+	    then
+            exit
 		else
 			echo "Please, insert a valid argument (y/n)"
 			try_again
