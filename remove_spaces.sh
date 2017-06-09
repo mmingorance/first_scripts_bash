@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Work folder
-folderToRead="$HOME/testing"
-
-for file in *; do
+read -p "Please, specify the directory to work on: " folderToWork
+for file in ${folderToWork}/*; do
     mv "$file" ${file// /_}
 done
